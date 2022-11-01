@@ -1,10 +1,10 @@
 import random
 
-MAX_LINES = 3
-MAX_BET = 100
+MAX_LINES = 5
+MAX_BET = 200
 MIN_BET = 1
-ROWS = 3
-COLS = 3
+ROWS = 5
+COLS = 5
 
 symbol_count = {
     "A": 2,
@@ -123,7 +123,7 @@ def spin(balance):
         else:
             break
 
-    print(f"Your bet: ${bet} on {lines} lines. Total bet is ${total_bet}")
+    print(f"Your bet: ${bet} on {lines} lines. Total bet is ${total_bet}\n")
 
     slots = get_slot_machine_spin(ROWS, COLS, symbol_count)
     print_slot_machine(slots)
@@ -150,7 +150,3 @@ def main():
 
 
 main()
-
-"""
-https://youtu.be/th4OBktqK1I?t=760
-"""
