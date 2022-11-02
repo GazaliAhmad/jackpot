@@ -8,9 +8,9 @@ COLS = 3
 
 symbol_count = {
     "A": 2,
-    "B": 4,
-    "C": 6,
-    "D": 8
+    "B": 3,
+    "C": 4,
+    "D": 5
 }
 
 symbol_multiplier = {
@@ -59,11 +59,13 @@ def get_lines(rows, cols, symbols):
 
 def print_lines(columns):
     for row in range(len(columns[0])):
+        line_number = int(row) + 1
+        print(f"Line {str(line_number)}", end=": | ", flush=True)
         for i, column in enumerate(columns):
             if i != len(columns) - 1:
-                print(column[row], end=" |  ")
+                print(column[row], end=" | ")
             else:
-                print(column[row], end="")
+                print(column[row], end=" | ")
 
         print()
 
@@ -128,8 +130,7 @@ def play(balance):
     slots = get_lines(ROWS, COLS, symbol_count)
     print_lines(slots)
 
-    winnings, winning_lines = check_for_win(slots, lines, bet, symbol_multiplier
-                                            )
+    winnings, winning_lines = check_for_win(slots, lines, bet, symbol_multiplier)
     print(f"\nYou won ${winnings}")
     print(f"\nYou won on lines:", *winning_lines, sep=" ")
     return winnings - total_bet
@@ -151,3 +152,10 @@ def main():
 
 
 main()
+
+"""
+Player can choose the line number and same bet amount
+Player can choose the line number with different bet amounts
+Winnings can be diagonal if player chose all 3 lines
+Winnings with two symbols
+"""
