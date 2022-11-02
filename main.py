@@ -39,8 +39,8 @@ def check_for_win(columns, lines, bet, values):
 
 def get_lines(rows, cols, symbols):
     all_symbols = []
-    for symbol, symbol_count in symbols.items():
-        for _ in range(symbol_count):
+    for symbol, symbol_ct in symbols.items():
+        for _ in range(symbol_ct):
             all_symbols.append(symbol)
 
     columns = []
