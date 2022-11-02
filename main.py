@@ -1,10 +1,10 @@
 import random
 
-MAX_LINES = 5
+MAX_LINES = 3
 MAX_BET = 200
 MIN_BET = 1
-ROWS = 5
-COLS = 5
+ROWS = 3
+COLS = 3
 
 symbol_count = {
     "A": 2,
@@ -13,7 +13,7 @@ symbol_count = {
     "D": 8
 }
 
-symbol_value = {
+symbol_multiplier = {
     "A": 5,
     "B": 4,
     "C": 3,
@@ -37,7 +37,7 @@ def check_for_win(columns, lines, bet, values):
     return winnings, winnings_lines
 
 
-def get_slot_machine_spin(rows, cols, symbols):
+def get_lines(rows, cols, symbols):
     all_symbols = []
     for symbol, symbol_count in symbols.items():
         for _ in range(symbol_count):
@@ -57,7 +57,7 @@ def get_slot_machine_spin(rows, cols, symbols):
     return columns
 
 
-def print_slot_machine(columns):
+def print_lines(columns):
     for row in range(len(columns[0])):
         for i, column in enumerate(columns):
             if i != len(columns) - 1:
@@ -111,7 +111,7 @@ def get_bet_amount():
     return bet
 
 
-def spin(balance):
+def play(balance):
     lines = get_number_of_lines()
     while True:
         bet = get_bet_amount()
@@ -125,10 +125,11 @@ def spin(balance):
 
     print(f"Your bet: ${bet} on {lines} lines. Total bet is ${total_bet}\n")
 
-    slots = get_slot_machine_spin(ROWS, COLS, symbol_count)
-    print_slot_machine(slots)
+    slots = get_lines(ROWS, COLS, symbol_count)
+    print_lines(slots)
 
-    winnings, winning_lines = check_for_win(slots, lines, bet, symbol_value)
+    winnings, winning_lines = check_for_win(slots, lines, bet, symbol_multiplier
+                                            )
     print(f"\nYou won ${winnings}")
     print(f"\nYou won on lines:", *winning_lines, sep=" ")
     return winnings - total_bet
@@ -141,7 +142,7 @@ def main():
         choice = input("\nPress any to play or q to quit: ")
         if choice == "q":
             break
-        balance += spin(balance)
+        balance += play(balance)
         if balance <= 0:
             print("\nYou are out of money. Game over.")
             break
